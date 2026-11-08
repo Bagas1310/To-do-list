@@ -1,0 +1,305 @@
+/* ======================================================
+   TaskFlow — Global Styles
+   ====================================================== */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --tf-transition: 0.2s ease;
+  --tf-radius: 0.75rem;
+  --tf-shadow-sm: 0 1px 4px rgba(0,0,0,.08);
+  --tf-shadow-md: 0 4px 16px rgba(0,0,0,.12);
+  --tf-shadow-lg: 0 8px 32px rgba(0,0,0,.16);
+}
+
+/* ---------- Global ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  transition: background-color var(--tf-transition), color var(--tf-transition);
+}
+
+/* ---------- Dark-mode surface tokens ---------- */
+[data-bs-theme="dark"] {
+  --tf-shadow-sm: 0 1px 4px rgba(0,0,0,.3);
+  --tf-shadow-md: 0 4px 16px rgba(0,0,0,.4);
+  --tf-shadow-lg: 0 8px 32px rgba(0,0,0,.5);
+}
+
+/* ---------- App Shell ---------- */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tf-main {
+  flex: 1;
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+/* ---------- Header ---------- */
+.tf-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--tf-shadow-sm);
+}
+
+[data-bs-theme="light"] .tf-header {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+[data-bs-theme="dark"] .tf-header {
+  background: rgba(33, 37, 41, 0.9) !important;
+}
+
+.tf-brand {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-size: 1.35rem;
+}
+
+/* ---------- Stat Cards ---------- */
+.tf-stat-card {
+  border-radius: var(--tf-radius);
+  transition: transform var(--tf-transition), box-shadow var(--tf-transition);
+  box-shadow: var(--tf-shadow-sm);
+  border: none;
+}
+
+.tf-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tf-shadow-md);
+}
+
+.tf-stat-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ---------- Task Form ---------- */
+.tf-form-card {
+  border-radius: var(--tf-radius);
+  border: none;
+  box-shadow: var(--tf-shadow-sm);
+  transition: box-shadow var(--tf-transition);
+}
+
+.tf-form-card:focus-within {
+  box-shadow: var(--tf-shadow-md);
+}
+
+/* ---------- Filter Bar ---------- */
+.tf-filterbar {
+  border-radius: var(--tf-radius);
+  border: none;
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.tf-filter-tabs .nav-link {
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  transition: background var(--tf-transition), color var(--tf-transition);
+}
+
+/* ---------- Task Cards ---------- */
+.tf-task-card {
+  border-radius: var(--tf-radius);
+  border: 1px solid transparent;
+  box-shadow: var(--tf-shadow-sm);
+  transition: transform var(--tf-transition), box-shadow var(--tf-transition), opacity var(--tf-transition), border-color var(--tf-transition);
+  animation: slideInUp 0.25s ease both;
+}
+
+.tf-task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tf-shadow-md);
+}
+
+.tf-task-card.completed-card {
+  opacity: 0.65;
+}
+
+[data-bs-theme="light"] .tf-task-card {
+  background: #fff;
+  border-color: rgba(0,0,0,.06);
+}
+
+[data-bs-theme="dark"] .tf-task-card {
+  background: #2b3035;
+  border-color: rgba(255,255,255,.06);
+}
+
+.tf-task-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color var(--tf-transition);
+}
+
+.tf-task-title.completed-text {
+  text-decoration: line-through;
+  color: var(--bs-secondary-color);
+}
+
+.tf-task-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- Priority Badges ---------- */
+.tf-priority-low    { --bs-badge-color: #fff; background-color: #198754 !important; }
+.tf-priority-medium { --bs-badge-color: #000; background-color: #ffc107 !important; color: #000 !important; }
+.tf-priority-high   { --bs-badge-color: #fff; background-color: #dc3545 !important; }
+
+/* ---------- Checkbox ---------- */
+.tf-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ---------- Due Date Badge ---------- */
+.tf-due-badge {
+  font-size: 0.75rem;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.tf-due-overdue {
+  background-color: rgba(220,53,69,.12);
+  color: #dc3545;
+}
+
+[data-bs-theme="dark"] .tf-due-overdue {
+  background-color: rgba(220,53,69,.2);
+  color: #f87171;
+}
+
+.tf-due-today {
+  background-color: rgba(255,193,7,.15);
+  color: #c79a00;
+}
+
+[data-bs-theme="dark"] .tf-due-today {
+  background-color: rgba(255,193,7,.2);
+  color: #ffd54f;
+}
+
+.tf-due-normal {
+  background-color: rgba(13,110,253,.1);
+  color: #0d6efd;
+}
+
+[data-bs-theme="dark"] .tf-due-normal {
+  background-color: rgba(13,110,253,.15);
+  color: #6ea8fe;
+}
+
+/* ---------- Empty State ---------- */
+.tf-empty-state {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.tf-empty-icon {
+  font-size: 4rem;
+  opacity: 0.3;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Animations ---------- */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.tf-fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+/* ---------- Delete Modal ---------- */
+.tf-modal-danger .modal-header {
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: calc(var(--bs-modal-inner-border-radius) - 1px)
+                 calc(var(--bs-modal-inner-border-radius) - 1px) 0 0;
+}
+
+/* ---------- Search box ---------- */
+.tf-search-wrapper {
+  position: relative;
+}
+
+.tf-search-wrapper .tf-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.45;
+  font-size: 1rem;
+}
+
+.tf-search-wrapper input {
+  padding-left: 2.25rem;
+}
+
+.tf-search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  opacity: 0.45;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--tf-transition);
+}
+
+.tf-search-clear:hover {
+  opacity: 1;
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 576px) {
+  .tf-brand { font-size: 1.1rem; }
+  .tf-stat-card .display-6 { font-size: 1.5rem; }
+}
